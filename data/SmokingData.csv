@@ -1,0 +1,16 @@
+﻿"Statistic","CensusYear","gender","General Health","Age Group","UNIT","All persons"
+
+
+"Population","2022","Male","health - Very good","All ages","Number","1362525"
+"Population","2022","Male","health - Good","All ages","Number","748517"
+"Population","2022","Male","health - Fair","All ages","Number","212809"
+"Population","2022","Male","health - Bad","All ages","Number","33966"
+"Population","2022","Male","health - Very Bad","All ages","Number","7944"
+"Population","2022","Male","Not stated","All ages","Number","178788"
+
+"Population","2022","Female"," health - Very good","All ages","Number","1378469"
+"Population","2022","Female"," health - Good","All ages","Number","778510"
+"Population","2022","Female"," health - Fair","All ages","Number","232086"
+"Population","2022","Female"," health - Bad","All ages","Number","38590"
+"Population","2022","Female"," health - Very Bad","All ages","Number","8899"
+"Population","2022","Female","Not stated","All ages","Number","168036"
