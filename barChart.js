@@ -2,28 +2,28 @@ class BarChart {
 	constructor(obj) {
 		// Initialize properties from the object passed to the constructor. If properties are not specified, default values are used.
 		Object.assign(this, {
-			XOffset: 0,
-			YOffset: 0,
-			titleSize: 16,
-			titleColor: "#000",
-			titleText: "",
+			XOffset: obj.x,
+			YOffset: obj.y,
+			titleSize: obj.titleSize,
+			titleColor: obj.titleColor,
+			titleText: obj.titleText,
 			titleWidth: obj.w,
-			axisLineColor: "#000",
-			axisLineThickness: 1,
-			tickColor: "#000",
-			tickStrokeWeight: 1,
-			tickStrokeLength: 5,
-			tickPadding: 10,
-			numTicks: 5,
-			tickTextColor: "#000",
-			tickTextSize: 12,
-			tickDecimals: 0,
-			barWidth: 30,
-			barColor: "#000",
-			barStrokeThickness: 1,
-			barStrokeColor: "#000",
-			labelTextSize: 10,
-			labelColor: "#000",
+			axisLineColor: obj.axisLineColor,
+			axisLineThickness: obj.axisLineThickness,
+			tickColor: obj.tickColor,
+			tickStrokeWeight: obj.tickStrokeWeight,
+			tickStrokeLength: obj.tickStrokeLength,
+			tickPadding: obj.tickPadding,
+			numTicks: obj.numTicks,
+			tickTextColor: obj.tickTextColor,
+			tickTextSize: obj.tickTextSize,
+			tickDecimals: obj.tickDecimals,
+			barWidth: obj.barWidth,
+			barColor: obj.barColor,
+			barStrokeThickness: obj.barStrokeThickness,
+			barStrokeColor: obj.barStrokeColor,
+			labelTextSize: obj.labelTextSize,
+			labelColor: obj.labelColor,
 			chartWidth: obj.w,
 			chartHeight: obj.h
 		}, obj);
@@ -37,8 +37,8 @@ class BarChart {
 		// Draw the axes
 		stroke(this.axisLineColor);
 		strokeWeight(this.axisLineThickness);
-		line(0, 0, 0, -this.h); // Vertical axis
-		line(0, 0, this.w, 0); // Horizontal axis
+		line(0, 0, 0, -this.chartHeight); // Vertical axis
+		line(0, 0, this.chartWidth, 0); // Horizontal axis
 
 		// Calculate properties for bar placement
 		let barGap = (this.w - this.numBars * this.barWidth) / (this.numBars + 1); // Space between bars
@@ -64,7 +64,7 @@ class BarChart {
 				fill(this.labelColor);
 				textAlign(CENTER);
 				textSize(this.labelTextSize);
-				text(this.data[i].xAxisLabel, -50, 0); // Draw the rotated label text
+				text(this.data[i].xAxisLabel, -30, 0); // Draw the rotated label text
 				pop(); // Restore the transformation state
 			}
 		}
@@ -87,6 +87,32 @@ class BarChart {
 			textSize(this.tickTextSize);
 			text(tickValue.toFixed(this.tickDecimals), -this.tickPadding, yPosition);
 		}
+
+				// Draw chart title
+				push();
+				fill(this.titleColor);
+				textSize(this.titleSize);
+				textAlign(CENTER, BOTTOM);
+				text(this.titleText, this.chartWidth / 2, -this.chartHeight - 20); // Adjust position as needed
+				pop();
+		
+				// Draw X-axis title
+				push();
+				fill(this.axisTitleColor);
+				textSize(this.axisTitleSize);
+				textAlign(CENTER, TOP);
+				text(this.xAxisTitle, this.chartWidth / 2, 120); // Position below the x-axis
+				pop();
+		
+				// Draw Y-axis title
+				push();
+				fill(this.axisTitleColor);
+				textSize(this.axisTitleSize);
+				translate(-70, -this.chartHeight / 2); // Adjust position as needed
+				rotate(-90);
+				textAlign(CENTER, BOTTOM);
+				text(this.yAxisTitle, 0, 0);
+				pop();
 
 		pop(); // Restore the original drawing style settings and transformations
 	}

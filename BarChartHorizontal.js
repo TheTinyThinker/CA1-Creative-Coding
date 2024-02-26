@@ -2,28 +2,32 @@ class BarChartHorizontal {
 	constructor(obj) {
 		// Similar initialization as BarChart, but adjusted for horizontal orientation
 		Object.assign(this, {
-			XOffset: 0,
-			YOffset: 0,
-			titleSize: 16,
-			titleColor: "#000",
-			titleText: "",
-			titleWidth: obj.w,
-			axisLineColor: "#000",
-			axisLineThickness: 1,
-			tickColor: "#000",
-			tickStrokeWeight: 1,
-			tickStrokeLength: 5,
-			tickPadding: 10,
-			numTicks: 5,
-			tickTextColor: "#000",
-			tickTextSize: 12,
-			tickDecimals: 0,
-			barHeight: 30, // For horizontal bars, we define barHeight instead of barWidth
-			barColor: "#000",
-			barStrokeThickness: 1,
-			barStrokeColor: "#000",
-			labelTextSize: 12,
-			labelColor: "#000",
+            XOffset: obj.x,
+            YOffset: obj.y,
+            titleSize: obj.titleSize,
+            titleColor: obj.titleColor,
+            titleText: obj.titleText,
+            xAxisTitle: obj.xAxisTitle,
+            yAxisTitle: obj.yAxisTitle,
+            axisTitleSize: obj.axisTitleSize,
+            axisTitleColor: obj.axisTitleColor,
+			//titleWidth: obj.w,
+			axisLineColor: obj.axisLineColor,
+			axisLineThickness: obj.axisLineThickness,
+			tickColor: obj.tickColor,
+			tickStrokeWeight: obj.tickStrokeWeight,
+			tickStrokeLength: obj.tickStrokeLength,
+			tickPadding: obj.tickPadding,
+			numTicks: obj.numTicks,
+			tickTextColor: obj.tickTextColor,
+			tickTextSize: obj.tickTextSize,
+			//tickDecimals: obj.tickDecimals,
+			barHeight: obj.barWidth, // For horizontal bars, we define barHeight instead of barWidth
+			barColor: obj.barColor,
+			barStrokeThickness: obj.barStrokeThickness,
+			barStrokeColor: obj.barStrokeColor,
+			labelTextSize: obj.labelTextSize,
+			labelColor: obj.labelColor,
 			chartWidth: obj.w,
 			chartHeight: obj.h
 		}, obj);
@@ -85,6 +89,33 @@ class BarChartHorizontal {
 			textSize(this.tickTextSize);
 			text(tickValue.toFixed(this.tickDecimals), xPosition, this.h + this.tickPadding); // Position labels just below tick lines
 		}
+
+		 // Add rendering for the chart title
+		 push();
+		 textSize(this.titleSize);
+		 fill(this.titleColor);
+		 textAlign(CENTER, BOTTOM);
+		 text(this.titleText, this.w / 2, -20); // Adjust positioning as needed
+		 pop();
+ 
+		 // Add rendering for the X-axis title
+		 push();
+		 textSize(this.axisTitleSize);
+		 fill(this.axisTitleColor);
+		 textAlign(CENTER, TOP);
+		 text(this.xAxisTitle, this.w / 2, this.h + 40); // Adjust positioning as needed
+		 pop();
+ 
+		 // Add rendering for the Y-axis title
+		 push();
+		 textSize(this.axisTitleSize);
+		 fill(this.axisTitleColor);
+		 textAlign(CENTER, TOP);
+		 translate(-140, this.h / 2); // Adjust positioning as needed
+		 rotate(-90);
+		 text(this.yAxisTitle, 0, 0);
+		 pop();
+ 
 
 
 		pop(); // Restore the original drawing style settings and transformations

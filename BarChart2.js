@@ -17,6 +17,12 @@ class BarChartStacked2 {
             tickPadding: obj.tickPadding,
             tickTextColor: obj.tickTextColor,
             tickTextSize: obj.tickTextSize,
+            labelPadding: obj.labelPadding,
+            xAxisTitle: obj.xAxisTitle,
+            yAxisTitle: obj.yAxisTitle,
+            chartTitle: obj.chartTitle,
+            titleTextSize: obj.titleTextSize || 16, // Default value if not specified
+            titleTextColor: obj.titleTextColor || '#000',
             data: obj.data,
         });
         this.numBars = this.data.length;
@@ -66,8 +72,8 @@ class BarChartStacked2 {
             
             //text(item.xAxisLabel, xPosition + this.barWidth / 2, 10);
             push(); // Save the current drawing state
-            translate(xPosition + this.barWidth / 2, 20); // Move to the label's intended location
-            rotate(85); // Rotate by -45 degrees (PI/4 radians)
+            translate(xPosition + this.barWidth / 2, this.labelPadding); // Move to the label's intended location
+            rotate(-85); 
             fill(this.labelColor);
             noStroke();
             textAlign(CENTER);
@@ -93,6 +99,32 @@ for (let i = 0; i <= this.numTicks; i++) {
     // Adjust text() call to use new yPosition and value
     text(value.toFixed(0), -this.tickLength - this.tickPadding, yPosition);
 }
+        // Render X Axis Title
+        push();
+        textAlign(CENTER, TOP);
+        textSize(this.titleTextSize);
+        fill(this.titleTextColor);
+        text(this.xAxisTitle, this.chartWidth / 2, this.tickLength + this.tickPadding * 2 +80);
+        pop();
+
+        // Render Y Axis Title
+        push();
+        translate(-this.tickLength * 4, -this.chartHeight / 2 );
+        rotate(-90);
+        textAlign(CENTER, TOP);
+        textSize(this.titleTextSize);
+        fill(this.titleTextColor);
+        text(this.yAxisTitle, 0, -50);
+        pop();
+
+        // Render Chart Title
+        push();
+        textAlign(CENTER, BOTTOM);
+        textSize(this.titleTextSize + 4); // Slightly larger than axis titles
+        fill(this.titleTextColor);
+        text(this.chartTitle, this.chartWidth / 2, -this.chartHeight - this.tickPadding * 4);
+        pop();
+
 
         pop();
     }

@@ -28,7 +28,7 @@ class BarChartStacked {
 			labelColor: obj.labelColor,
 			chartWidth: obj.w,
 			chartHeight: obj.h,
-			chartType: obj.chartType // Default chart type, can be overridden by obj
+			
 		}, obj);
 		this.numBars = this.data.length; // Calculate the number of bars based on the data length
 	}

@@ -39,11 +39,33 @@ class BarChartStackedLine {
         push();
         translate(this.XOffset, this.YOffset);
     
-        // Chart axes
-        stroke(this.axisLineColor);
-        strokeWeight(this.axisLineThickness);
-        line(0, 0, 0, -this.chartHeight);
-        line(0, 0, this.chartWidth, 0);
+                // Draw chart title
+                fill(this.titleColor);
+                textSize(this.titleSize);
+                textAlign(CENTER, BOTTOM);
+                text(this.titleText, this.chartWidth / 2, -this.chartHeight - 20); // Adjust Y position as needed
+        
+                // Chart axes
+                stroke(this.axisLineColor);
+                strokeWeight(this.axisLineThickness);
+                line(0, 0, 0, -this.chartHeight);
+                line(0, 0, this.chartWidth, 0);
+            
+                // Existing rendering logic for bars, labels, etc.
+        
+                // Draw X-axis title
+                fill(this.axisTitleColor);
+                textSize(this.axisTitleSize);
+                textAlign(CENTER, TOP);
+                text(this.xAxisTitle, this.chartWidth / 2, 100); // Adjust Y position as needed
+        
+                // Draw Y-axis title
+                push();
+                translate(-50, -this.chartHeight / 2); // Adjust X position as needed
+                rotate(-90);
+                textAlign(CENTER, BOTTOM);
+                text(this.yAxisTitle, 0, -10);
+                pop();
     
         let barGap = (this.chartWidth - this.numBars * this.barWidth) / (this.numBars + 1);
 // Adjust the maxValue calculation to accommodate both chart types correctly

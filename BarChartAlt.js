@@ -46,8 +46,10 @@ class BarChartStandardLineAlt {
 
         let barGap = (this.chartWidth - this.numBars * this.barWidth) / (this.numBars + 1);
         let maxValue = this.data.reduce((acc, curr) => {
+          //  console.log('Accumulator:', acc, 'Current:', curr);
             return Math.max(acc, curr.Male, curr.Female);
         }, 0);
+
         let scale = this.chartHeight / maxValue;
 
         for (let i = 0; i < this.numBars; i++) {
@@ -67,18 +69,20 @@ class BarChartStandardLineAlt {
             // Label
             push();
             translate(xPosition + this.barWidth / 2, this.labelPadding);
-            rotate(radians(this.tickTextRotate));
+            rotate(this.tickTextRotate);
             fill(this.labelColor);
             textAlign(CENTER);
             textSize(this.labelTextSize);
             text(item.xAxisLabel, 0, 0);
             pop();
         }
+        console.log("maxValue:", maxValue, "chartHeight:", this.chartHeight, "numTicks:", this.numTicks);
 
         // Y-axis ticks and labels
         for (let i = 0; i <= this.numTicks; i++) {
             let yPosition = -i * (this.chartHeight / this.numTicks);
             let tickValue = (maxValue / this.numTicks) * i;
+           // console.log(this.maxValue)
             stroke(this.tickColor);
             strokeWeight(this.tickStrokeWeight);
             line(0, yPosition, -this.tickStrokeLength, yPosition);
@@ -87,7 +91,14 @@ class BarChartStandardLineAlt {
             noStroke();
             textAlign(RIGHT, CENTER);
             textSize(this.tickTextSize);
+            console.log("Tick:", i, "tickValue:", tickValue.toFixed(this.tickDecimals), "yPosition:", yPosition);
             text(tickValue.toFixed(this.tickDecimals), -this.tickPadding, yPosition);
+         
+
+        //    console.log("maxValue:", maxValue, "scale:", scale);
+// Inside the loop:
+//console.log("Tick:", i, "tickValue:", tickValue.toFixed(this.tickDecimals), "yPosition:", yPosition);
+
         }
 
         // Average line
