@@ -249,6 +249,9 @@ let barChartConfig = {
         titleSize: 16,
         titleColor: "#000000",
         titleText: "Stacked Bar Chart Example",
+        chartTitle : 'Grouped Bar chart', // Default chart title
+        xAxisTitle :'Age range', // Default X axis title
+        yAxisTitle :'Total number range',
         titleWidth: 400,
         chartWidth: 400, // Width of the chart
         chartHeight: 400, // Height of the chart
