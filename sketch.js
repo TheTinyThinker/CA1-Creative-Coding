@@ -7,7 +7,7 @@ let fontLight;
 let fontReg;
 let fontBold;
 
-let canvasWidth = 1800;
+let canvasWidth = 1600;
 let canvasHeight = 1200;
 let backgroundColour = "#e3e3e3";
 
@@ -252,7 +252,7 @@ function transformData(rawData) {
         tickTextSize: 12,
         
         tickDecimals: 0, // Number of decimal places for tick labels
-        chartType: "standard", // "stacked" for stacked bars, alternative could be "standard" for regular bars
+        chartType: "stacked", // "stacked" for stacked bars, alternative could be "standard" for regular bars
         showAverageLine: true, // Option to show the average line across the chart
         averageLineColor: "#FF0000", // Color for the average line
         averageLineThickness: 2 // Thickness for the average line
@@ -261,6 +261,69 @@ function transformData(rawData) {
     
     // Initialize your bar chart with the correctly set configuration
     barCharts.push(new BarChartStackedLine(stackedBarChartConfig2));
+
+    let scatterPlotConfig = {
+        XOffset: 1100,
+        YOffset: 700,
+        w: 400,
+        h: 400,
+        data: cleanData,
+        pointSize: 15,
+        axisLineColor: "#474747",
+        axisLineThickness: 2,
+        labelTextSize: 12,
+        labelColor: "#474747",
+        numTicks: 5,
+        tickPadding: 5,
+        tickTextColor: "#474747",
+        tickTextSize: 12,
+    };
+    
+    // Initialize your scatter plot with the correctly set configuration
+   
+    
+    // Initialize your bar chart with the correctly set configuration
+    barCharts.push(new ScatterPlot(scatterPlotConfig));
+
+    let BarChartAltConfig = {
+        XOffset: 1100, // X offset for the chart's position
+        YOffset: 500, // Y offset for the chart's position
+        titleSize: 16,
+        titleColor: "#000000",
+        titleText: "Stacked Bar Chart Example",
+        titleWidth: 400,
+        chartWidth: 400, // Width of the chart
+        chartHeight: 400, // Height of the chart
+        data: cleanDataV2, // Prepared data array
+        barWidth: 30,
+        axisLineColor: "#474747",
+        axisLineThickness: 2,
+        barColors: ['#416096', '#FF69B4' , '#1CA91E'], // Color array for bars
+        barStrokeThickness: 1,
+        barStrokeColor: "#000000",
+        labelTextSize: 12,
+        labelColor: "#474747",
+        labelPadding: 15, // Padding for labels below bars
+        tickTextRotate: 85, // Angle for tick text rotation
+        numTicks: 5,
+        tickStrokeLength: 10,
+        tickPadding: 5,
+        tickColor: "#474747",
+        tickTextColor: "#474747",
+        tickTextSize: 12,
+        
+        tickDecimals: 0, // Number of decimal places for tick labels
+        chartType: "standard", // "stacked" for stacked bars, alternative could be "standard" for regular bars
+        showAverageLine: true, // Option to show the average line across the chart
+        averageLineColor: "#FF0000", // Color for the average line
+        averageLineThickness: 2 // Thickness for the average line
+    };
+    
+    // Initialize your scatter plot with the correctly set configuration
+   
+    
+    // Initialize your bar chart with the correctly set configuration
+    barCharts.push(new BarChartStandardLineAlt(BarChartAltConfig));
     
 }
 

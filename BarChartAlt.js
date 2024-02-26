@@ -1,4 +1,4 @@
-class BarChartStackedLine {
+class BarChartStandardLineAlt {
     constructor(obj) {
         Object.assign(this, {
             XOffset: obj.XOffset,
@@ -24,13 +24,12 @@ class BarChartStackedLine {
             barStrokeColor: obj.barStrokeColor,
             labelTextSize: obj.labelTextSize,
             labelColor: obj.labelColor,
-            labelPadding: obj.labelPadding, // Added for positioning labels correctly
+            labelPadding: obj.labelPadding,
             chartWidth: obj.chartWidth,
             chartHeight: obj.chartHeight,
-            chartType: obj.chartType,
-            showAverageLine: obj.showAverageLine || false, // Option to show/hide the average line
-            averageLineColor: obj.averageLineColor || '#FF0000', // Default color for the average line
-            averageLineThickness: obj.averageLineThickness || 2 // Default thickness for the average line
+            showAverageLine: obj.showAverageLine,
+            averageLineColor: obj.averageLineColor,
+            averageLineThickness: obj.averageLineThickness
         }, obj);
         this.numBars = this.data.length;
     }
@@ -38,55 +37,36 @@ class BarChartStackedLine {
     render() {
         push();
         translate(this.XOffset, this.YOffset);
-    
+
         // Chart axes
         stroke(this.axisLineColor);
         strokeWeight(this.axisLineThickness);
         line(0, 0, 0, -this.chartHeight);
         line(0, 0, this.chartWidth, 0);
-    
+
         let barGap = (this.chartWidth - this.numBars * this.barWidth) / (this.numBars + 1);
         let maxValue = this.data.reduce((acc, curr) => {
-            let total = this.chartType === 'stacked' ? curr.Male + curr.Female : Math.max(curr.Male, curr.Female);
-            return Math.max(acc, total);
+            return Math.max(acc, curr.Male, curr.Female);
         }, 0);
-    
         let scale = this.chartHeight / maxValue;
-    
+
         for (let i = 0; i < this.numBars; i++) {
             let item = this.data[i];
             let xPosition = barGap + i * (this.barWidth + barGap);
-    
-            if (this.chartType === 'stacked') {
-                // Stacked bar chart logic
-                let maleHeight = (item.Male * scale);
-                let femaleHeight = (item.Female * scale);
-    
-                // Draw male segment
-                fill(this.barColors[0]);
-                stroke(this.barStrokeColor);
-                strokeWeight(this.barStrokeThickness);
-                rect(xPosition, 0, this.barWidth, -maleHeight);
-    
-                // Draw female segment on top of male segment
-                fill(this.barColors[1]);
-                rect(xPosition, -maleHeight, this.barWidth, -femaleHeight);
-            } else {
-                // Standard bar chart logic
-                // Male bar
-                fill(this.barColors[0]);
-                stroke(this.barStrokeColor);
-                strokeWeight(this.barStrokeThickness);
-                rect(xPosition, 0, this.barWidth / 2, -(item.Male * scale));
-    
-                // Female bar, next to the male bar
-                fill(this.barColors[1]);
-                rect(xPosition + this.barWidth / 2, 0, this.barWidth / 2, -(item.Female * scale));
-            }
-    
-            // Label rotation and positioning
+
+            // Male bar
+            fill(this.barColors[0]);
+            stroke(this.barStrokeColor);
+            strokeWeight(this.barStrokeThickness);
+            rect(xPosition, 0, this.barWidth / 2, -(item.Male * scale));
+
+            // Female bar, next to the male bar
+            fill(this.barColors[1]);
+            rect(xPosition + this.barWidth / 2, 0, this.barWidth / 2, -(item.Female * scale));
+
+            // Label
             push();
-            translate(xPosition + this.barWidth / 2, this.labelPadding + (this.chartType === 'standard' ? 20 : 0)); // Adjust label position for standard chart type
+            translate(xPosition + this.barWidth / 2, this.labelPadding);
             rotate(radians(this.tickTextRotate));
             fill(this.labelColor);
             textAlign(CENTER);
@@ -94,8 +74,6 @@ class BarChartStackedLine {
             text(item.xAxisLabel, 0, 0);
             pop();
         }
-        console.log("data",this.data);
-
 
         // Y-axis ticks and labels
         for (let i = 0; i <= this.numTicks; i++) {
@@ -115,7 +93,7 @@ class BarChartStackedLine {
         // Average line
         if (this.showAverageLine) {
             let totalValue = this.data.reduce((acc, curr) => acc + curr.Male + curr.Female, 0);
-            let averageValue = totalValue / (this.numBars * 2); // Dividing by numBars*2 if you want the average per gender
+            let averageValue = totalValue / (this.numBars * 2);
             let averageYPosition = -averageValue * scale;
             stroke(this.averageLineColor);
             strokeWeight(this.averageLineThickness);

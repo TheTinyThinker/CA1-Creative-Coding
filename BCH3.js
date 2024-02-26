@@ -96,7 +96,7 @@ if (this.chartType === 'stacked') {
             text(item.xAxisLabel, 0, 0);
             pop();
         }
-        console.log("data",this.data);
+        //console.log("data",this.data);
 
 
         // Y-axis ticks and labels
