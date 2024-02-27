@@ -150,6 +150,14 @@ let barChartConfig = {
         chartTitle: "Stacked/Standard Bar chart",
         titleTextSize: 14,
         titleTextColor: "#333",
+        legendText: "male",
+        legendTextColor: "#000",
+        legendRectColor: "red", // Matching the point color
+        legendSize: 12,
+        chartTitleOffset: 50, // Distance from the top of the chart to the chart title
+        yAxisTitleOffset: 60, // Distance from the chart to the Y-axis title
+        xAxisTitleOffset: 60, // Distance from the chart to the X-axis title
+        legendOffset: {x: 350, y: 50}, // Position of the legend box relative to the chart
     };
     
    barCharts.push(new BarChartStacked2(stackedBarChartConfig));
@@ -291,9 +299,9 @@ let barChartConfig = {
 function draw() {
     background(backgroundColour);
     textFont(fontLight);
-    textSize(16);
+    textSize(26);
     fill('#000');
-    text("people who smoke and there ages", 20, 30);
+    text("People who smoke and there age ranges", 20, 30);
 
     barCharts.forEach(barChart => barChart.render());
   
