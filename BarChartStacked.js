@@ -23,8 +23,10 @@ class BarChartStacked2 {
             chartTitle: obj.chartTitle,
             titleTextSize: obj.titleTextSize || 16, // Default value if not specified
             titleTextColor: obj.titleTextColor || '#000',
+            legendText2: obj.legendText2,
             legendText: obj.legendText || "Legend", // Default legend text
             legendTextColor: obj.legendTextColor || "#000",
+            legendRectColor2: obj.legendRectColor2,
             legendRectColor: obj.legendRectColor || this.pointColor, // Match the point color by default
             legendSize: obj.legendSize || 12,
             // New properties for positioning the titles and legend
@@ -146,12 +148,12 @@ for (let i = 0; i <= this.numTicks; i++) {
 		 pop();
 
          		 push();
-		 fill(this.legendRectColor);
-		 rect(this.legendOffset.x, -this.chartHeight - this.legendOffset.y, 20, 40);
+		 fill(this.legendRectColor2);
+		 rect(this.legendOffset.x, -this.chartHeight - this.legendOffset.y+20, 20, 10);
 		 fill(this.legendTextColor);
 		 textSize(this.legendSize);
 		 textAlign(LEFT, CENTER);
-		 text(this.legendText, this.legendOffset.x + 25, -this.chartHeight - this.legendOffset.y + 25);
+		 text(this.legendText2, this.legendOffset.x + 25, -this.chartHeight - this.legendOffset.y + 25);
 		 pop();
 
 

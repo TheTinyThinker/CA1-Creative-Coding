@@ -54,6 +54,7 @@ class BarChartStackedLine {
                 // Existing rendering logic for bars, labels, etc.
         
                 // Draw X-axis title
+                noStroke()
                 fill(this.axisTitleColor);
                 textSize(this.axisTitleSize);
                 textAlign(CENTER, TOP);

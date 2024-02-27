@@ -14,8 +14,8 @@ let backgroundColour = "#e3e3e3";
 function preload() {
     data = loadTable("data/Combined.csv", "csv", "header");
     data = loadTable("data/CombindedSmokngDataCSV.csv", "csv", "header");
-    fontLight = loadFont('Fonts/Montserrat-BlackItalic.ttf');
-    fontReg = loadFont('Fonts/Montserrat-ExtraLight.ttf');
+    fontLight = loadFont('Fonts/Montserrat-Light.ttf');
+    fontReg = loadFont('Fonts/Montserrat-medium.ttf');
     fontBold = loadFont('Fonts/Montserrat-BoldItalic.ttf');
 }
 
@@ -151,8 +151,10 @@ let barChartConfig = {
         titleTextSize: 14,
         titleTextColor: "#333",
         legendText: "male",
+        legendText2: "female",
         legendTextColor: "#000",
-        legendRectColor: "red", // Matching the point color
+        legendRectColor: "#416096", // Matching the point color
+        legendRectColor2: "#FF69B4", // Matching the point color
         legendSize: 12,
         chartTitleOffset: 50, // Distance from the top of the chart to the chart title
         yAxisTitleOffset: 60, // Distance from the chart to the Y-axis title
@@ -196,7 +198,7 @@ let barChartConfig = {
         tickTextSize: 12,
         
         tickDecimals: 0, // Number of decimal places for tick labels
-        chartType: "standard", // "stacked" for stacked bars, alternative could be "standard" for regular bars
+        chartType: "stacked", // "stacked" for stacked bars, alternative could be "standard" for regular bars
         showAverageLine: true, // Option to show the average line across the chart
         averageLineColor: "#FF0000", // Color for the average line
         averageLineThickness: 2 // Thickness for the average line
@@ -302,6 +304,8 @@ function draw() {
     textSize(26);
     fill('#000');
     text("People who smoke and there age ranges", 20, 30);
+    textSize(16);
+    text("A smoking question was asked for the first time on the Census 2022 form.", 20, 50);
 
     barCharts.forEach(barChart => barChart.render());
   
